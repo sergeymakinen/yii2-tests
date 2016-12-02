@@ -1,0 +1,32 @@
+{
+    "name": "sergeymakinen/yii2-tests",
+    "homepage": "https://github.com/sergeymakinen/yii2-tests",
+    "description": "Common Yii 2 extension tests stuff",
+    "keywords": ["yii2-tests", "yii2", "yii", "tests", "test"],
+    "type": "library",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/sergeymakinen/yii2-tests/issues",
+        "source": "https://github.com/sergeymakinen/yii2-tests"
+    },
+    "authors": [
+        {
+            "name": "Sergey Makinen",
+            "email": "sergey@makinen.ru",
+            "homepage": "https://makinen.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": "~2.0.1",
+        "phpunit/phpunit": "^4.8 || ^5.6"
+    },
+    "config": {
+        "process-timeout": 1800
+    },
+    "autoload": {
+        "classmap": [
+            "src/TestCase.php"
+        ]
+    }
+}
