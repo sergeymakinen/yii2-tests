@@ -32,8 +32,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     {
         new $class(ArrayHelper::merge([
             'id' => 'console-test',
-            'basePath' => __DIR__,
-            'vendorPath' => __DIR__ . '/../vendor',
+            'basePath' => \Yii::getAlias('@tests'),
+            'vendorPath' => \Yii::getAlias('@tests/../vendor'),
         ], $config));
     }
 
@@ -47,12 +47,12 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     {
         new $class(ArrayHelper::merge([
             'id' => 'web-test',
-            'basePath' => __DIR__,
-            'vendorPath' => __DIR__ . '/../vendor',
+            'basePath' => \Yii::getAlias('@tests'),
+            'vendorPath' => \Yii::getAlias('@tests/../vendor'),
             'components' => [
                 'request' => [
                     'enableCookieValidation' => false,
-                    'scriptFile' => __DIR__ . '/index.php',
+                    'scriptFile' => \Yii::getAlias('@tests/index.php'),
                     'scriptUrl' => '/index.php',
                 ],
             ],
