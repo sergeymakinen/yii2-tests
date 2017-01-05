@@ -10,13 +10,13 @@ The preferred way to install this extension is through [composer](https://getcom
 
 Either run
 
-```
-php composer.phar require sergeymakinen/yii2-tests "^1.0" --dev
+```bash
+composer require --dev "sergeymakinen/yii2-tests:^1.0"
 ```
 
 or add
 
-```
+```json
 "sergeymakinen/yii2-tests": "^1.0"
 ```
 
