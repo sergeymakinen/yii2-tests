@@ -1,10 +1,10 @@
 <?php
 /**
- * Common Yii 2 extension tests stuff.
+ * Yii 2 tests stuff
  *
  * @see       https://github.com/sergeymakinen/yii2-tests
- * @copyright Copyright (c) 2016 Sergey Makinen (https://makinen.ru)
- * @license   https://github.com/sergeymakinen/yii2-tests/blob/master/LICENSE The MIT License
+ * @copyright Copyright (c) 2016-2017 Sergey Makinen (https://makinen.ru)
+ * @license   https://github.com/sergeymakinen/yii2-tests/blob/master/LICENSE MIT License
  */
 
 namespace sergeymakinen\tests;
@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     protected function tearDown()
     {
@@ -23,8 +23,26 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Returns a test double for the specified class.
+     * @param string $originalClassName
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function createMock($originalClassName)
+    {
+        if (is_callable('parent::createMock')) {
+            return parent::createMock($originalClassName);
+        }
+        
+        return $this
+            ->getMockBuilder($originalClassName)
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->getMock();
+    }
+
+    /**
      * Creates a Yii 2 console application.
-     *
      * @param array $config
      * @param string $class
      */
@@ -39,7 +57,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     /**
      * Creates a Yii 2 web application.
-     *
      * @param array $config
      * @param string $class
      */
@@ -76,10 +93,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     /**
      * Returns the reflected property.
-     *
      * @param object|string $object
      * @param string $name
-     *
      * @return \ReflectionProperty
      */
     protected function getProperty($object, $name)
@@ -93,10 +108,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     /**
      * Returns the reflected method.
-     *
      * @param object|string $object
      * @param string $name
-     *
      * @return \ReflectionMethod
      */
     protected function getMethod($object, $name)
@@ -110,10 +123,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     /**
      * Returns the private/protected property by its name.
-     *
      * @param object|string $object
      * @param string $name
-     *
      * @return mixed
      */
     protected function getInaccessibleProperty($object, $name)
@@ -125,7 +136,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     /**
      * Sets the private/protected property value by its name.
-     *
      * @param object|string $object
      * @param string $name
      * @param mixed $value
@@ -139,11 +149,9 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
 
     /**
      * Invokes the private/protected method by its name and returns its result.
-     *
      * @param object|string $object
      * @param string $name
      * @param array $args
-     *
      * @return mixed
      */
     protected function invokeInaccessibleMethod($object, $name, array $args = [])
