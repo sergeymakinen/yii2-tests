@@ -8,8 +8,8 @@ php:
     - 7.0
     - 7.1
 env:
-    - COMPOSER_PREFER_LOWEST=""
-    - COMPOSER_PREFER_LOWEST="--prefer-lowest"
+    - COMPOSER_ARGS=""
+    - COMPOSER_ARGS="--prefer-lowest"
 matrix:
     include:
         - php: 5.6
@@ -27,7 +27,7 @@ before_install:
 install:
     - composer self-update
     - composer config -g repositories.asset-packagist composer https://asset-packagist.org
-    - travis_retry composer update --no-interaction --prefer-stable --prefer-dist $COMPOSER_PREFER_LOWEST
+    - travis_retry composer update --no-interaction --prefer-stable --prefer-dist $COMPOSER_ARGS
     - composer show
 script:
     - vendor/bin/phpunit $PHPUNIT_COVERAGE
