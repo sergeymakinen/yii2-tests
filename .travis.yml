@@ -8,6 +8,7 @@ php:
     - 7.0
     - 7.1
 env:
+    - COMPOSER_PREFER_LOWEST=""
     - COMPOSER_PREFER_LOWEST="--prefer-lowest"
 matrix:
     include:
