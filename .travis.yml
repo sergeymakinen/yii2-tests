@@ -34,7 +34,7 @@ before_install:
     - stty cols 120
     - |
       if [ -z "$PHPUNIT_COVERAGE" ]; then
-          phpenv config-rm xdebug.ini
+          phpenv config-rm xdebug.ini || echo "xdebug not available"
       fi
 install:
     - composer self-update
