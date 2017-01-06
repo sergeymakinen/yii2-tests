@@ -10,14 +10,19 @@ matrix:
         - php: 5.5
         - php: 5.5
           env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
-        - php: 7.0
-        - php: 7.0
-          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
-        - php: 7.1
-        - php: 7.1
+        - php: 5.6
           env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
         - php: 5.6
           env: PHPUNIT_COVERAGE="--coverage-clover=coverage.xml"
+        - php: 7.0
+        - php: 7.0
+          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
+        - php: 7.1
+        - php: 7.1
+          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
+        - php: nightly
+        - php: nightly
+          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
     allow_failures:
         - php: nightly
         - php: nightly
