@@ -7,38 +7,97 @@
  * @license   https://github.com/sergeymakinen/yii2-tests/blob/master/LICENSE MIT License
  */
 
-namespace sergeymakinen\tests;
+namespace sergeymakinen\yii\tests;
 
 use yii\helpers\ArrayHelper;
 
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var string
+     */
+    private $_expectedException;
+
+    /**
      * @inheritDoc
      */
     protected function tearDown()
     {
         parent::tearDown();
+        $this->_expectedException = null;
         $this->destroyApplication();
+    }
+
+    /**
+     * Returns whether the class' parent method exists.
+     * @param string $name
+     * @return bool
+     * @since 2.0
+     */
+    protected function isParentMethod($name)
+    {
+        return is_callable('parent::' . $name);
     }
 
     /**
      * Returns a test double for the specified class.
      * @param string $originalClassName
      * @return \PHPUnit_Framework_MockObject_MockObject
+     * @since 1.1
      */
     protected function createMock($originalClassName)
     {
-        if (is_callable('parent::createMock')) {
+        if ($this->isParentMethod(__FUNCTION__)) {
             return parent::createMock($originalClassName);
         }
-        
+
         return $this
             ->getMockBuilder($originalClassName)
             ->disableOriginalConstructor()
             ->disableOriginalClone()
             ->disableArgumentCloning()
             ->getMock();
+    }
+
+    /**
+     * Sets an exception expected.
+     * @param string $exception
+     * @throws \PHPUnit_Framework_Exception
+     * @since 2.0
+     */
+    public function expectException($exception)
+    {
+        if ($this->isParentMethod(__FUNCTION__)) {
+            parent::expectException($exception);
+            return;
+        }
+
+        if (!is_string($exception)) {
+            throw \PHPUnit_Util_InvalidArgumentHelper::factory(1, 'string');
+        }
+
+        $this->_expectedException = $exception;
+        $this->setExpectedException($this->_expectedException);
+    }
+
+    /**
+     * Sets an exception code expected.
+     * @param int|string $code
+     * @throws \PHPUnit_Framework_Exception
+     * @since 2.0
+     */
+    public function expectExceptionCode($code)
+    {
+        if ($this->isParentMethod(__FUNCTION__)) {
+            parent::expectExceptionCode($code);
+            return;
+        }
+
+        if (!is_int($code) && !is_string($code)) {
+            throw \PHPUnit_Util_InvalidArgumentHelper::factory(1, 'integer or string');
+        }
+
+        $this->setExpectedException($this->_expectedException, '', $code);
     }
 
     /**
@@ -81,7 +140,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     protected function destroyApplication()
     {
-        if (!isset(\Yii::$app)) {
+        if (\Yii::$app === null) {
             return;
         }
 
@@ -107,21 +166,6 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Returns the reflected method.
-     * @param object|string $object
-     * @param string $name
-     * @return \ReflectionMethod
-     */
-    protected function getMethod($object, $name)
-    {
-        $class = new \ReflectionClass($object);
-        while (!$class->hasMethod($name)) {
-            $class = $class->getParentClass();
-        }
-        return $class->getMethod($name);
-    }
-
-    /**
      * Returns the private/protected property by its name.
      * @param object|string $object
      * @param string $name
@@ -144,7 +188,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     {
         $property = $this->getProperty($object, $name);
         $property->setAccessible(true);
-        $property->setValue($value);
+        $property->setValue($object, $value);
     }
 
     /**
@@ -156,7 +200,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     protected function invokeInaccessibleMethod($object, $name, array $args = [])
     {
-        $method = $this->getMethod($object, $name);
+        $method = new \ReflectionMethod($object, $name);
         $method->setAccessible(true);
         return $method->invokeArgs($object, $args);
     }

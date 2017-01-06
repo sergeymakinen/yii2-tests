@@ -19,12 +19,17 @@
     "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "~2.0.2",
-        "phpunit/phpunit": "^4.8 || ^5.6",
-        "symfony/var-dumper": "^2.8 || ^3.2"
+        "phpunit/phpunit": "^4.8 || ^5.2",
+        "symfony/var-dumper": "^2.7 || ^3.0"
     },
     "autoload": {
-        "classmap": [
-            "src/TestCase.php"
-        ]
+        "psr-4": {
+            "sergeymakinen\\yii\\tests\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "sergeymakinen\\yii\\tests\\": "tests"
+        }
     }
 }

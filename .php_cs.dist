@@ -42,21 +42,17 @@ $rules = [
     'no_whitespace_in_blank_line' => true,
     'normalize_index_brace' => true,
     'object_operator_without_whitespace' => true,
-    'ordered_class_elements' => true,
     'ordered_imports' => true,
     'php_unit_construct' => true,
     'php_unit_dedicate_assert' => true,
     'php_unit_fqcn_annotation' => true,
     'phpdoc_indent' => true,
-    'phpdoc_inline_tag' => true,
     'phpdoc_no_access' => true,
-    'phpdoc_no_alias_tag' => true,
     'phpdoc_no_empty_return' => true,
     'phpdoc_no_package' => true,
     'phpdoc_order' => true,
     'phpdoc_scalar' => true,
     'phpdoc_single_line_var_spacing' => true,
-    'phpdoc_summary' => true,
     'phpdoc_trim' => true,
     'phpdoc_types' => true,
     'return_type_declaration' => true,
@@ -71,20 +67,15 @@ $rules = [
     'whitespace_after_comma_in_array' => true,
 ];
 
-$include = [
-    __DIR__,
-];
-
-$exclude = [
-];
-
 return Config::create()
     ->setFinder(
         Finder::create()
             ->ignoreDotFiles(false)
             ->name('.php_cs.dist')
-            ->in($include)
-            ->exclude($exclude)
+            ->in([
+                __DIR__ . '/src',
+                __DIR__ . '/tests',
+            ])
     )
     ->setRiskyAllowed(true)
     ->setRules($rules)
