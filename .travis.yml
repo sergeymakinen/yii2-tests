@@ -5,28 +5,28 @@ language: php
 matrix:
     include:
         - php: 5.4
+          env: COMPOSER_LOWEST="--prefer-lowest"
         - php: 5.4
-          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
         - php: 5.5
+          env: COMPOSER_LOWEST="--prefer-lowest"
         - php: 5.5
-          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
         - php: 5.6
-          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
+          env: COMPOSER_LOWEST="--prefer-lowest"
         - php: 5.6
           env: PHPUNIT_COVERAGE="--coverage-clover=coverage.xml"
         - php: 7.0
+          env: COMPOSER_LOWEST="--prefer-lowest"
         - php: 7.0
-          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
         - php: 7.1
+          env: COMPOSER_LOWEST="--prefer-lowest"
         - php: 7.1
-          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
         - php: nightly
+          env: COMPOSER_LOWEST="--prefer-lowest"
         - php: nightly
-          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
     allow_failures:
         - php: nightly
+          env: COMPOSER_LOWEST="--prefer-lowest"
         - php: nightly
-          env: COMPOSER_PREFER_LOWEST="--prefer-lowest"
 cache:
     directories:
         - vendor
@@ -39,7 +39,7 @@ before_install:
 install:
     - composer self-update
     - composer config -g repositories.asset-packagist composer https://asset-packagist.org
-    - travis_retry composer update --no-interaction --prefer-stable --prefer-dist $COMPOSER_PREFER_LOWEST
+    - travis_retry composer update --no-interaction --prefer-stable --prefer-dist $COMPOSER_LOWEST
     - composer show
 script:
     - vendor/bin/phpunit $PHPUNIT_COVERAGE
