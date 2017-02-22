@@ -19,7 +19,7 @@
     "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "~2.0.2",
-        "sergeymakinen/tests": "^1.0"
+        "sergeymakinen/tests": "^1.0.1"
     },
     "autoload": {
         "psr-4": {
