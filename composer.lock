@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "62ffc28f8a26cd267f9e583f5b34c457",
+    "content-hash": "0b47eca0a56edcac015fdc57f4f00e19",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -1558,21 +1558,22 @@
         },
         {
             "name": "sergeymakinen/tests",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sergeymakinen/tests.git",
-                "reference": "c04c6d0bf7bc3f490a3cc8f4c017d6b76e3c9afd"
+                "reference": "6ad901d0caaa76cd1d891e10c1218654c0178bed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sergeymakinen/tests/zipball/c04c6d0bf7bc3f490a3cc8f4c017d6b76e3c9afd",
-                "reference": "c04c6d0bf7bc3f490a3cc8f4c017d6b76e3c9afd",
+                "url": "https://api.github.com/repos/sergeymakinen/tests/zipball/6ad901d0caaa76cd1d891e10c1218654c0178bed",
+                "reference": "6ad901d0caaa76cd1d891e10c1218654c0178bed",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.4 || ^7.0",
                 "phpunit/phpunit": "^4.8.25 || ^5.4.3 || ^6.0.5 || ^7.0",
+                "sebastian/comparator": "^1.2.3 || ^2.0",
                 "symfony/var-dumper": "^2.8 || ^3.0 || ^4.0"
             },
             "type": "library",
@@ -1600,7 +1601,7 @@
                 "tests",
                 "unit"
             ],
-            "time": "2018-02-12T13:36:38+00:00"
+            "time": "2018-02-12T18:13:04+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
